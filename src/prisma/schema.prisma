@@ -17,7 +17,7 @@ model Product {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   deletedAt      DateTime?
-  OrderProdcucts OrderProdcucts?
+  OrderProdcucts OrderProducts?
 
   @@map("products")
 }
@@ -28,18 +28,18 @@ model Order {
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   deletedAt      DateTime?
-  OrderProdcucts OrderProdcucts[]
+  OrderProdcucts OrderProducts[]
 
   @@map("orders")
 }
 
-model OrderProdcucts {
+model OrderProducts {
   id Int @id @default(autoincrement())
 
-  orderID   Int
-  order     Order   @relation(fields: [orderID], references: [id])
-  productId Int?     @unique
-  product   Product? @relation(fields: [productId], references: [id])
+  order_id   String
+  order     Order   @relation(fields: [order_id], references: [platform_id])
+  product_id String?     @unique
+  product   Product? @relation(fields: [product_id], references: [platform_id])
 
   @@map("order_products")
 }
