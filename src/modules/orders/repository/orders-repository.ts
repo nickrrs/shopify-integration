@@ -6,7 +6,15 @@ export class OrderRepository{
 
 
     public all(): Promise<Array<Order>> {
-        return this.client.order.findMany({})
+        return this.client.order.findMany({
+            include: {
+                OrderProdcucts: {
+                    include: {
+                        product: true
+                    }
+                }
+            }
+        })
     }
 
     public save(data: OrderSavePayload): Promise<Order> {
