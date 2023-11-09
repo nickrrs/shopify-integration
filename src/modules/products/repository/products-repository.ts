@@ -9,6 +9,14 @@ export class ProductRepository{
         return this.client.product.findMany({})
     }
 
+    public findFirst(product_id: string){
+      return this.client.product.findFirst({
+        where: {
+           platform_id: product_id
+        },
+      });
+    }
+
     public async batchStore(
         payload: Array<ProductSavePayload>
       ): Promise<{ count: number }> {
@@ -17,6 +25,6 @@ export class ProductRepository{
         });
     
         return products;
-      }
+    }
 
 }

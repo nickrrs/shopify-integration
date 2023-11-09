@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { ProductRepository } from '../repository/products-repository'
 import { ShopifyService } from '../../../services/shopify/shopify-service'
-import { ProductSavePayload, ShopifyData } from '../interface/products-interface'
+import { ShopifyData } from '../interface/products-interface'
 
 export default class ProductService {
 
@@ -16,6 +16,11 @@ export default class ProductService {
     async getAll(){
         const products = await this.productRepository.all();
         return { products }
+    }
+
+    async findProduct(product_id: string){
+      const product = await this.productRepository.findFirst(product_id);
+      return product;
     }
 
     async storeProducts(){
