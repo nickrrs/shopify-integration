@@ -16,6 +16,12 @@ export default class OrderService{
       this.ordersProductsService = new OrderProductsService(prismaClient);
     }
 
+    async getAll(){
+      const orders = await this.orderRepository.all();
+      if(!orders) throw Error("Error while trying to retrieve the orders.");
+      return { orders }
+    }
+    
     async storeOrder(payload: OrderSavePayloadDTO){
         const orderPayload = {
            platform_id: payload.platform_id
